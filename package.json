@@ -1,0 +1,26 @@
+{
+  "name": "mybestshop-fullstack",
+  "version": "1.0.0",
+  "description": "Fullstack E-commerce Platform with Next.js and Node.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "npm run build:frontend",
+    "build:frontend": "cd frontend && npm run build",
+    "start": "npm run start:backend",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm start",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "db:setup": "cd backend && npm run db:generate && npm run db:push && npm run db:seed",
+    "db:reset": "cd backend && npm run db:push -- --force-reset && npm run db:seed",
+    "lint": "npm run lint:frontend",
+    "lint:frontend": "cd frontend && npm run lint"
+  },
+  "keywords": ["e-commerce", "fullstack", "nextjs", "nodejs", "prisma", "postgresql"],
+  "author": "MyBestShop Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

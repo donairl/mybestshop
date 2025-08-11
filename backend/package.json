@@ -1,0 +1,35 @@
+{
+  "name": "mybestshop-backend",
+  "version": "1.0.0",
+  "description": "Backend for MyBestShop E-commerce",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:seed": "node src/seeders/seed.js",
+    "db:studio": "prisma studio"
+  },
+  "keywords": ["e-commerce", "express", "prisma", "postgresql"],
+  "author": "MyBestShop Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "dotenv": "^16.3.1",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "pdfkit": "^0.14.0",
+    "prisma": "^5.7.1",
+    "@prisma/client": "^5.7.1",
+    "express-validator": "^7.0.1",
+    "compression": "^1.7.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
