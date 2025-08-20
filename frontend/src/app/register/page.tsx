@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Check, X, ArrowLeft, User, Mail, Lock, Shield } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -90,9 +92,31 @@ export default function RegisterPage() {
       
       // In a real app, you would send the data to your backend
       console.log('Registration data:', formData);
+      // Send registration data to backend
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+          firstName: formData.firstName,
+          lastName: formData.lastName
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setErrors({ submit: data.message || 'Registration failed. Please try again.' });
+        setIsSubmitting(false);
+        return;
+      }
       
       // Redirect to login or show success message
       alert('Registration successful! Please check your email to verify your account.');
+      router.push('/login');
       
     } catch (error) {
       console.error('Registration error:', error);
