@@ -1,4 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient, Decimal } = require('@prisma/client');
 const bcrypt = require('bcryptjs');
 
 const prisma = new PrismaClient();
@@ -7,8 +7,8 @@ const sampleProducts = [
   {
     name: "Wireless Bluetooth Headphones",
     description: "Premium wireless headphones with noise cancellation, 30-hour battery life, and crystal clear sound quality. Perfect for music lovers and professionals.",
-    price: 129.99,
-    salePrice: 99.99,
+    price: new Decimal(129.99),
+    salePrice: new Decimal(99.99),
     stock: 50,
     category: "Electronics",
     tags: ["wireless", "bluetooth", "noise-cancellation", "music"],
@@ -22,8 +22,8 @@ const sampleProducts = [
   {
     name: "Smart Fitness Watch",
     description: "Advanced fitness tracker with heart rate monitoring, GPS, sleep tracking, and 7-day battery life. Compatible with iOS and Android.",
-    price: 199.99,
-    salePrice: 149.99,
+    price: new Decimal(199.99),
+    salePrice: new Decimal(149.99),
     stock: 30,
     category: "Electronics",
     tags: ["fitness", "smartwatch", "health", "tracking"],
@@ -37,8 +37,8 @@ const sampleProducts = [
   {
     name: "Organic Cotton T-Shirt",
     description: "Comfortable and sustainable organic cotton t-shirt. Available in multiple colors and sizes. Perfect for everyday wear.",
-    price: 29.99,
-    salePrice: 24.99,
+    price: new Decimal(29.99),
+    salePrice: new Decimal(24.99),
     stock: 100,
     category: "Clothing",
     tags: ["organic", "cotton", "sustainable", "comfortable"],
@@ -52,8 +52,8 @@ const sampleProducts = [
   {
     name: "Stainless Steel Water Bottle",
     description: "Eco-friendly stainless steel water bottle with double-wall insulation. Keeps drinks cold for 24 hours or hot for 12 hours.",
-    price: 24.99,
-    salePrice: 19.99,
+    price: new Decimal(24.99),
+    salePrice: new Decimal(19.99),
     stock: 75,
     category: "Home & Garden",
     tags: ["eco-friendly", "insulated", "stainless-steel", "water"],
@@ -67,8 +67,8 @@ const sampleProducts = [
   {
     name: "Professional Camera Lens",
     description: "High-quality 50mm f/1.8 prime lens for professional photography. Perfect for portraits, street photography, and low-light situations.",
-    price: 399.99,
-    salePrice: 349.99,
+    price: new Decimal(399.99),
+    salePrice: new Decimal(349.99),
     stock: 15,
     category: "Electronics",
     tags: ["camera", "lens", "photography", "professional"],
@@ -82,8 +82,8 @@ const sampleProducts = [
   {
     name: "Handcrafted Wooden Desk",
     description: "Beautiful handcrafted wooden desk made from sustainable materials. Perfect for home office or study room.",
-    price: 299.99,
-    salePrice: 249.99,
+    price: new Decimal(299.99),
+    salePrice: new Decimal(249.99),
     stock: 10,
     category: "Furniture",
     tags: ["handcrafted", "wooden", "desk", "sustainable"],
@@ -97,8 +97,8 @@ const sampleProducts = [
   {
     name: "Natural Face Moisturizer",
     description: "Hydrating face moisturizer made with natural ingredients like aloe vera, jojoba oil, and vitamin E. Suitable for all skin types.",
-    price: 34.99,
-    salePrice: 29.99,
+    price: new Decimal(34.99),
+    salePrice: new Decimal(29.99),
     stock: 60,
     category: "Beauty & Health",
     tags: ["natural", "moisturizer", "skincare", "hydrating"],
@@ -112,8 +112,8 @@ const sampleProducts = [
   {
     name: "Portable Bluetooth Speaker",
     description: "Compact and powerful portable speaker with 360-degree sound, waterproof design, and 20-hour battery life.",
-    price: 79.99,
-    salePrice: 59.99,
+    price: new Decimal(79.99),
+    salePrice: new Decimal(59.99),
     stock: 40,
     category: "Electronics",
     tags: ["portable", "bluetooth", "speaker", "waterproof"],

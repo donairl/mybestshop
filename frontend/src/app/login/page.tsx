@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, ArrowLeft, Mail, Lock, Shield } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -48,9 +50,43 @@ export default function LoginPage() {
       
       // In a real app, you would send the data to your backend
       console.log('Login data:', formData);
+      // Make AJAX request to backend for login
+      try {
+        const response = await fetch(
+          process.env.NEXT_PUBLIC_API_URL
+            ? `${process.env.NEXT_PUBLIC_API_URL.replace(/\/$/, '')}/auth/login`
+            : 'http://localhost:5000/api/auth/login',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: formData.email,
+              password: formData.password,
+            }),
+            credentials: 'include', // in case you use cookies for auth
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          setErrors({ submit: data.message || 'Invalid email or password. Please try again.' });
+          return;
+        }
+
+        // Optionally store token or user info here
+         localStorage.setItem('token', data.token);
+
+      } catch (err) {
+        setErrors({ submit: 'Network error. Please try again.' });
+        return;
+      }
       
       // Redirect to dashboard or show success message
       alert('Login successful! Welcome back!');
+      router.push('/dashboard');
       
     } catch (error) {
       console.error('Login error:', error);
