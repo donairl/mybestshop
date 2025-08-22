@@ -153,3 +153,24 @@ export interface AuthResponse {
   user: User
   token: string
 }
+
+// Admin Dashboard Types
+export interface DashboardStats {
+  totalProducts: number
+  totalOrders: number
+  totalUsers: number
+  totalRevenue: number
+}
+
+export interface LowStockProduct {
+  id: string
+  name: string
+  stock: number
+  images: string[]
+}
+
+export interface DashboardResponse {
+  stats: DashboardStats
+  recentOrders: Order[]
+  lowStockProducts: LowStockProduct[]
+}

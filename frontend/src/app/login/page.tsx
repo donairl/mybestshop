@@ -5,9 +5,15 @@ import { motion } from 'framer-motion';
 import { Eye, EyeOff, ArrowLeft, Mail, Lock, Shield } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { authUtils } from '@/lib/auth';
+import { useRedirectIfAuthenticated } from '@/lib/hooks';
 
 export default function LoginPage() {
   const router = useRouter();
+
+  // Redirect if already authenticated
+  useRedirectIfAuthenticated();
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -46,7 +52,7 @@ export default function LoginPage() {
     
     // Simulate API call
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      
       
       // In a real app, you would send the data to your backend
       console.log('Login data:', formData);
@@ -76,17 +82,23 @@ export default function LoginPage() {
           return;
         }
 
-        // Optionally store token or user info here
-         localStorage.setItem('token', data.token);
+        // Store token and user info using authUtils
+        authUtils.setToken(data.token);
+        authUtils.setUser(data.data.user);
 
+        // Get redirect path based on user role and redirect
+        const redirectPath = authUtils.getRedirectPath(data.data.user);
+        router.push(redirectPath);
+
+        return;
       } catch (err) {
         setErrors({ submit: 'Network error. Please try again.' });
         return;
       }
-      
-      // Redirect to dashboard or show success message
+
+      // This part should not be reached due to early return, but kept for safety
       alert('Login successful! Welcome back!');
-      router.push('/dashboard');
+      router.push('/products');
       
     } catch (error) {
       console.error('Login error:', error);

@@ -89,11 +89,15 @@ export default function RegisterPage() {
     // Simulate API call
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      // Send registration data to backend
+      const url = process.env.NEXT_PUBLIC_API_URL
+      ? `${process.env.NEXT_PUBLIC_API_URL.replace(/\/$/, '')}/auth/register`
+      : 'http://localhost:5000/api/auth/register';
+
       // In a real app, you would send the data to your backend
       console.log('Registration data:', formData);
       // Send registration data to backend
-      const response = await fetch('/api/auth/register', {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
